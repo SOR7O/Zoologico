@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Sql;
 
 namespace Zoologico
 {
@@ -23,6 +24,8 @@ namespace Zoologico
         public MainWindow()
         {
             InitializeComponent();
+      
         }
+       
     }
 }

@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Listado de zoologico"></Label>
+        <Label Grid.Row="0" Grid.Column="1" Content="Listado de animales en zoologico"></Label>
+        <Label Grid.Row="0" Grid.Column="2" Content="Listado de animales"></Label>
+        <ListBox Name="lbZoologicos" Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <ListBox Name="lbAnimalesZoologicos" Grid.Column="1" Grid.Row="1" Margin="5"/>
+        <ListBox Name="lbAnimales" Grid.Column="2" Grid.Row="1" Margin="5"/>
+
+
+
     </Grid>
 </Window>
