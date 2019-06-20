@@ -12,7 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//Agregando los namespaces necesarios para SQL Server
+using System.Configuration;
 using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Zoologico
 {
@@ -21,11 +25,46 @@ namespace Zoologico
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Varible miembro
+        SqlConnection sqlConnection;
         public MainWindow()
         {
             InitializeComponent();
-      
+            //ZooloogicoConnectionString
+            string connectionString = ConfigurationManager.ConnectionStrings["_11_Administrador_de_Zoologico.Properties.Settings.ZooloogicoConnectionString"].ConnectionString;
+            sqlConnection = new SqlConnection(connectionString);
         }
        
+        private void mostrarZoologico()
+        {
+            try
+            {
+                //El query a realizar en la base de datos
+                string query = "SELECT * FROM ZOO.Zoologico";
+
+                //sqlDataAdapater es una intrefaz entre las tablas y los objetos utilizables de C#
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query,sqlConnection);
+                using (sqlDataAdapter)
+                {
+                    //Objeto en C# que refleja una tabla de BD
+                    DataTable tablaZoologico = new DataTable();
+                    //Llenar el objeto de tipo DataTable
+                    sqlDataAdapter.Fill(tablaZoologico);
+                    //Desplegar el campo que se desea mandar a llamar|| para el usuario
+                    lbZoologicos.DisplayMemberPath = "nombre";
+                    //valor entregado|| Para el prorgramadoe
+                    lbZoologicos.SelectedValuePath = "id";
+                    //Referencia de los datos para el listbox(popular)
+                    lbZoologicos.ItemsSource = tablaZoologico.DefaultView;
+                    mostrarZoologico();
+
+                }
+            }
+            catch(Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+        }
     }
 }
