@@ -27,20 +27,24 @@ namespace Zoologico
     {
         //Varible miembro
         SqlConnection sqlConnection;
+   
         public MainWindow()
         {
             InitializeComponent();
-            //ZooloogicoConnectionString
-            string connectionString = ConfigurationManager.ConnectionStrings["_11_Administrador_de_Zoologico.Properties.Settings.ZooloogicoConnectionString"].ConnectionString;
+            //ZoologicoConnectionString
+            string connectionString = ConfigurationManager.ConnectionStrings["Zoologico.Properties.Settings.ZoologicoConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
+            
         }
        
-        private void mostrarZoologico()
+       
+        private void MostrarZoologico()
         {
             try
             {
+                 MessageBox.Show("Entrando al try");
                 //El query a realizar en la base de datos
-                string query = "SELECT * FROM ZOO.Zoologico";
+                string query = "SELECT * FROM ZOO.Animal";
 
                 //sqlDataAdapater es una intrefaz entre las tablas y los objetos utilizables de C#
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query,sqlConnection);
@@ -56,7 +60,8 @@ namespace Zoologico
                     lbZoologicos.SelectedValuePath = "id";
                     //Referencia de los datos para el listbox(popular)
                     lbZoologicos.ItemsSource = tablaZoologico.DefaultView;
-                    mostrarZoologico();
+                    MostrarZoologico();
+                    MessageBox.Show("Exitosa");
 
                 }
             }
